@@ -102,8 +102,19 @@ public class SalesReporter {
 		}
 
 	}
-
 	
+	public static void main(String[] args) {
+
+		SalesReporter mySalesReporter = new SalesReporter();
+
+		mySalesReporter.getData();
+		mySalesReporter.computeStates();
+		mySalesReporter.displayResults();
+
+	}
+
+
+
 
 
 }
