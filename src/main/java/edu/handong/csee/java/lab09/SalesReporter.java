@@ -2,6 +2,15 @@ package edu.handong.csee.java.lab09;
 
 import java.util.Scanner;
 
+/**
+ * defines a SalesReporter object.
+ * This object has three data, which are highestSales, averageSales, and array of SalesAssociate class.
+ * By entering sales associate's name and sales, you can figure out whose sales is highest, 
+ * the average sales of total sales associates, and the difference between average sales and each sales associate's sales.
+ *
+ * @author jo jeong hoon
+ *
+ */
 public class SalesReporter {
 
 	private double highestSales;
@@ -12,6 +21,10 @@ public class SalesReporter {
 
 
 
+	/**
+	 * gets the number of total sales associates, name and sales of each sales associates.
+	 * And it sets the data of SalesAssociate object. 
+	 */
 	public void getData() {
 		Scanner keyboard = new Scanner(System.in);
 
@@ -44,6 +57,10 @@ public class SalesReporter {
 
 
 
+	/**
+	 * computes average sales of total sales associates.
+	 * And it discriminates whose sales is highest.
+	 */
 	public void computeStates() {
 
 		double sum = 0;
@@ -62,6 +79,11 @@ public class SalesReporter {
 
 	}
 
+	/**
+	 * shows all results, which are average sales, highest sales, whose sale is highest,
+	 * and the difference between the average and sales of each sales associate.
+	 * 
+	 */
 	public void displayResults() {
 
 		System.out.println("Average sales per associate is $" + averageSales);
@@ -102,7 +124,11 @@ public class SalesReporter {
 		}
 
 	}
-	
+
+	/**
+	 * starts this program.
+	 * @param args refers command-line arguments as an array of String objects.
+	 */
 	public static void main(String[] args) {
 
 		SalesReporter mySalesReporter = new SalesReporter();
