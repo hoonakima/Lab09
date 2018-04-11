@@ -1,6 +1,6 @@
-package edu.handong.csee.java.lab09;
-
-import java.util.Scanner;
+package edu.handong.csee.java.lab09; //package name
+ 
+import java.util.Scanner; //import Scanner class
 
 /**
  * defines a SalesReporter object.
@@ -11,12 +11,12 @@ import java.util.Scanner;
  * @author jo jeong hoon
  *
  */
-public class SalesReporter {
+public class SalesReporter { //defines SalesReporter class
 
-	private double highestSales;
-	private double averageSales;
-	private SalesAssociate[] team;// Team array's type is SalesAssociate class.
-	private int numOfAssociates;
+	private double highestSales; //instance variable
+	private double averageSales; //instance variable
+	private SalesAssociate[] team;// the name of the array is team, and the type of the array is SalesAssociate object
+	private int numOfAssociates; //instance variable
 
 
 
@@ -25,31 +25,31 @@ public class SalesReporter {
 	 * gets the number of total sales associates, name and sales of each sales associates.
 	 * And it sets the data of SalesAssociate object. 
 	 */
-	public void getData() {
-		Scanner keyboard = new Scanner(System.in);
+	public void getData() { //defines the getData method
+		Scanner keyboard = new Scanner(System.in); //instantiate Scanner object
 
-		System.out.println("Enter number of sales associates:");
-		this.numOfAssociates = keyboard.nextInt();
-
-
-		team = new SalesAssociate[numOfAssociates];
+		System.out.println("Enter number of sales associates:"); //print the line
+		this.numOfAssociates = keyboard.nextInt(); //set the instance variable as the entered value.
 
 
-		for(int i=0; i< numOfAssociates; i++ ) {
+		team = new SalesAssociate[numOfAssociates]; //instantiate the team array by entering the length of the array
 
-			SalesAssociate mySalesAssociate = new SalesAssociate();
 
-			team[i] = mySalesAssociate;
+		for(int i=0; i< numOfAssociates; i++ ) { //for loop starts from i is 0, and repeats until i is smaller than numOfAssociates 
 
-			System.out.println("Enter data for associate number " + (i+1));
-			System.out.print("Enter name of sales associate: ");
-			String name = keyboard.nextLine();
-			name = keyboard.nextLine();
-			System.out.print("Enter associate's sales: $ ");
-			double sales = keyboard.nextDouble();
+			SalesAssociate mySalesAssociate = new SalesAssociate(); //instantiate the SalesAssociate object
 
-			mySalesAssociate.setName(name);
-			mySalesAssociate.setSales(sales);
+			team[i] = mySalesAssociate; //set the team array value as mySalesAssociate object
+
+			System.out.println("Enter data for associate number " + (i+1)); //print the line
+			System.out.print("Enter name of sales associate: "); //print the line
+			String name = keyboard.nextLine(); //set local variable name as entered value
+			name = keyboard.nextLine(); //when entering the length of the team array, the "enter" inputs keyboard.nextLine(). So, write the code one more.
+			System.out.print("Enter associate's sales: $ "); //print the line 
+			double sales = keyboard.nextDouble(); //set local variable sales as entered value
+
+			mySalesAssociate.setName(name); //set name data of mySalesAssociate object as the variable name.
+			mySalesAssociate.setSales(sales); //set sales data of mySalesAssociate object as the variable sales.
 
 
 		}
@@ -61,20 +61,20 @@ public class SalesReporter {
 	 * computes average sales of total sales associates.
 	 * And it discriminates whose sales is highest.
 	 */
-	public void computeStates() {
+	public void computeStates() { //defines computeStates method
 
-		double sum = 0;
+		double sum = 0; //local variable
 
-		for(int i=0; i< numOfAssociates; i++ ) {
-			sum += team[i].getSales(); //바로 double sum 하면 안되는 이유?
+		for(int i=0; i< numOfAssociates; i++ ) { //for loop
+			sum += team[i].getSales(); //sums all sales of each objects, which are in the team array.
 		}
 
-		averageSales = (int)sum/numOfAssociates;
+		averageSales = (int)sum/numOfAssociates; //get average of sales, and make the average value as integer by casting.
 
-		highestSales = team[0].getSales();
-		for(int i=1; i<numOfAssociates; i++) {
-			if(team[i].getSales()>highestSales)
-				highestSales = team[i].getSales();
+		highestSales = team[0].getSales(); //suppose the sales of first object is highest one.
+		for(int i=1; i<numOfAssociates; i++) { //for loop
+			if(team[i].getSales()>highestSales) //if the sales of other object is higher than first one
+				highestSales = team[i].getSales(); //assign highestSales as the sales of the other one. If not, there is no change.
 		}
 
 	}
@@ -84,40 +84,40 @@ public class SalesReporter {
 	 * and the difference between the average and sales of each sales associate.
 	 * 
 	 */
-	public void displayResults() {
+	public void displayResults() { //defines displayResults method
 
-		System.out.println("Average sales per associate is $" + averageSales);
-		System.out.println("The highest sales figure is $" + highestSales);
-		System.out.println("");
-		System.out.println("The following had the highest sales: ");
+		System.out.println("Average sales per associate is $" + averageSales); //print the line
+		System.out.println("The highest sales figure is $" + highestSales); //print the line
+		System.out.println(""); //print enter
+		System.out.println("The following had the highest sales: "); //print the line
 
-		for(int i=0; i<numOfAssociates; i++) {
+		for(int i=0; i<numOfAssociates; i++) { //for loop
 
-			if(highestSales == team[i].getSales()) {
-				System.out.println("Name: " + team[i].getName());
-				System.out.println("Sales: $" + team[i].getSales());
-				System.out.println("$" + (team[i].getSales()- averageSales)+ " above the average.");
-				System.out.println("");
+			if(highestSales == team[i].getSales()) { //when the sales of ith object is highest one 
+				System.out.println("Name: " + team[i].getName()); //print the name of the object
+				System.out.println("Sales: $" + team[i].getSales()); //print the sales of the object
+				System.out.println("$" + (team[i].getSales()- averageSales)+ " above the average."); //print the difference between the sales and the average.
+				System.out.println(""); //print enter
 			}
 		}	
 
-		System.out.println("The rest performed as follows: ");
-		for(int i=0; i<numOfAssociates; i++) {
+		System.out.println("The rest performed as follows: "); //print the line
+		for(int i=0; i<numOfAssociates; i++) { //for loop
 
-			if(highestSales != team[i].getSales()) {
-				System.out.println("Name: " + team[i].getName());
-				System.out.println("Sales: $" + team[i].getSales());
-				if(averageSales < team[i].getSales()) {
-					System.out.println("$" + (team[i].getSales()- averageSales)+ " above the average. " );
-					System.out.println("");
+			if(highestSales != team[i].getSales()) { //this case is for the rest objects
+				System.out.println("Name: " + team[i].getName()); //print the name of object
+				System.out.println("Sales: $" + team[i].getSales()); //print the sales of object
+				if(averageSales < team[i].getSales()) { //when average is smaller than the sales of the object
+					System.out.println("$" + (team[i].getSales()- averageSales)+ " above the average. " ); //the average subtracted from the sales  
+					System.out.println(""); //print enter
 				}
-				if(averageSales == team[i].getSales()) {
-					System.out.println("Sales is same with the average." + "%n");
-					System.out.println("");
+				if(averageSales == team[i].getSales()) { //when average is same with the sales of the object
+					System.out.println("Sales is same with the average." + "%n"); //print the line
+					System.out.println(""); //print enter
 				}
-				if(averageSales > team[i].getSales()) {
-					System.out.println("$" + (averageSales - team[i].getSales())+ " below the average. ");
-					System.out.println("");
+				if(averageSales > team[i].getSales()) { //hen average is bigger than the sales of the object
+					System.out.println("$" + (averageSales - team[i].getSales())+ " below the average. "); //the sales subtracted from the average
+					System.out.println(""); //print enter
 				}
 
 			}
@@ -129,13 +129,13 @@ public class SalesReporter {
 	 * starts this program.
 	 * @param args refers command-line arguments as an array of String objects.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) { //defines the main method
 
-		SalesReporter mySalesReporter = new SalesReporter();
+		SalesReporter mySalesReporter = new SalesReporter(); //instantiate a SalesReporter object
 
-		mySalesReporter.getData();
-		mySalesReporter.computeStates();
-		mySalesReporter.displayResults();
+		mySalesReporter.getData(); //call getData method
+		mySalesReporter.computeStates(); //call computeStates method
+		mySalesReporter.displayResults(); //call displayResults method
 
 	}
 
