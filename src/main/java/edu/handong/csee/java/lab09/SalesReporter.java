@@ -53,7 +53,7 @@ public class SalesReporter { //defines SalesReporter class
 			System.out.println("Do you want to enter more data of a sales associate? [yes/no]:"); //print the line
 			String ans = keyboard.nextLine(); //space entered previous step will entered the value of ans
 			ans = keyboard.nextLine(); //answer from user
-	
+
 			if(ans.equalsIgnoreCase("no")) // when the answer is no
 				done = true; //the answer was no, so the while loop is done
 		}
@@ -125,7 +125,7 @@ public class SalesReporter { //defines SalesReporter class
 				}
 				if(averageSales > salesAssociate.getSales()) { //hen average is bigger than the sales of the object
 					System.out.println("$" + (averageSales - salesAssociate.getSales())+ " below the average. "); //the sales subtracted from the average
-					System.out.println(""); //print enter
+					System.out.println(); //print enter
 				}
 
 			}
@@ -133,6 +133,13 @@ public class SalesReporter { //defines SalesReporter class
 
 	}
 
+	/**
+	 * defines a SalesAssociate object, which has two data, name and sales.
+	 * Also, you can get and set the data by calling getter and setter.
+	 * 
+	 * @author jo jeong hoon
+	 *
+	 */
 	public class SalesAssociate { //defines SalesAssociate class
 
 		private String name; //instance variable
