@@ -30,7 +30,7 @@ public class SalesReporter { //defines SalesReporter class
 	public void getData() { //defines the getData method
 		Scanner keyboard = new Scanner(System.in); //instantiate Scanner object
 
-		team = new ArrayList<SalesAssociate>();  //assign a chunk of memory for an object of ArrayList class
+		team = new ArrayList<SalesAssociate>();  //assign a chunk of memory for ArrayList team
 		boolean done = false; //local variable 
 
 		while(!done) { //while loop iterates until the value of done is true
@@ -40,7 +40,7 @@ public class SalesReporter { //defines SalesReporter class
 
 			System.out.println("Enter data for associate"); //print the line
 			System.out.print("Enter name of sales associate: "); //print the line
-			String name = keyboard.nextLine(); //set local variable name as entered value
+			String name = keyboard.nextLine(); //set a local variable name as entered value
 			mySalesAssociate.setName(name); //set name data of mySalesAssociate object as the variable name.
 
 
@@ -48,14 +48,14 @@ public class SalesReporter { //defines SalesReporter class
 			double sales = keyboard.nextDouble(); //set local variable sales as entered value
 			mySalesAssociate.setSales(sales); //set sales data of mySalesAssociate object as the variable sales.
 
-			team.add(mySalesAssociate); //add mySalesAssociate object to team array list
+			team.add(mySalesAssociate); //add mySalesAssociate object to array list team
 
 			System.out.println("Do you want to enter more data of a sales associate? [yes/no]:"); //print the line
-			String ans = keyboard.nextLine(); //space entered previous step will entered the value of ans
-			ans = keyboard.nextLine(); //answer from user
+			String ans = keyboard.nextLine(); //space entered previous step is entered the value of ans
+			ans = keyboard.nextLine(); //the answer from user
 
 			if(ans.equalsIgnoreCase("no")) // when the answer is no
-				done = true; //the answer was no, so the while loop is done
+				done = true; //the answer is no, so the while loop is done
 		}
 	}
 
@@ -69,18 +69,18 @@ public class SalesReporter { //defines SalesReporter class
 
 		double sum = 0; //local variable
 
-		for(SalesAssociate salesAssociate : team ) { //for loop for all objects in team array list
+		for(SalesAssociate salesAssociate : team ) { //for loop for all objects in array list team
 			sum += salesAssociate.getSales(); //add all object's sales
 		}
 
-		averageSales = (int)sum/team.size(); //get average of sales, and make the average value as integer by casting.
+		averageSales = (int)sum/team.size(); //get average of sales, and make the average value as integer by type casting.
 
-		SalesAssociate man = team.get(0); //instantiate SalesAssociate class and designate the first object of team array list  
+		SalesAssociate man = team.get(0); //instantiate SalesAssociate class and designate the first object of array list team  
 
 		highestSales = man.getSales(); //suppose the sales of first object is highest one.
 
-		for(SalesAssociate salesAssociate : team ) { //for loop for all objects in team array list
-			if(salesAssociate.getSales() > highestSales) //if the sales of other object is higher than first one
+		for(SalesAssociate salesAssociate : team ) { //for loop for all objects in array list team
+			if(salesAssociate.getSales() > highestSales) //if the sales of other object is higher than the first one
 				highestSales = salesAssociate.getSales(); //assign highestSales as the sales of the other one. If not, there is no change.
 		}
 
@@ -98,9 +98,9 @@ public class SalesReporter { //defines SalesReporter class
 		System.out.println(); //print enter
 		System.out.println("The following had the highest sales: "); //print the line
 
-		for(SalesAssociate salesAssociate : team ) { //for loop for all objects in team array list
+		for(SalesAssociate salesAssociate : team ) { //for loop for all objects in array list team
 
-			if(highestSales == salesAssociate.getSales()) { //when the sales of first object is highest one 
+			if(highestSales == salesAssociate.getSales()) { //when the sales of an object is highest one 
 				System.out.println("Name: " + salesAssociate.getName()); //print the name of the object
 				System.out.println("Sales: $" + salesAssociate.getSales()); //print the sales of the object
 				System.out.println("$" + (salesAssociate.getSales()- averageSales)+ " above the average."); //print the difference between the sales and the average.
@@ -110,7 +110,7 @@ public class SalesReporter { //defines SalesReporter class
 
 		System.out.println("The rest performed as follows: "); //print the line
 
-		for(SalesAssociate salesAssociate : team ) { //for loop for all objects in team array list
+		for(SalesAssociate salesAssociate : team ) { //for loop for all objects in array list team
 
 			if(highestSales != salesAssociate.getSales()) { //this case is for the rest objects
 				System.out.println("Name: " + salesAssociate.getName()); //print the name of object
@@ -198,7 +198,7 @@ public class SalesReporter { //defines SalesReporter class
 	 * starts this program.
 	 * @param args refers command-line arguments as an array of String objects.
 	 */
-	public static void main(String[] args) { //defines the main method
+	public static void main(String[] args) { //defines a main method
 
 		SalesReporter mySalesReporter = new SalesReporter(); //instantiate a SalesReporter object
 
