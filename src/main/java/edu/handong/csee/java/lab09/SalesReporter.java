@@ -1,5 +1,6 @@
 package edu.handong.csee.java.lab09; //package name
- 
+
+import java.util.ArrayList;
 import java.util.Scanner; //import Scanner class
 
 /**
@@ -15,7 +16,7 @@ public class SalesReporter { //defines SalesReporter class
 
 	private double highestSales; //instance variable
 	private double averageSales; //instance variable
-	private SalesAssociate[] team;// the name of the array is team, and the type of the array is SalesAssociate object
+	private ArrayList<SalesAssociate> team;
 	private int numOfAssociates; //instance variable
 
 
@@ -28,30 +29,32 @@ public class SalesReporter { //defines SalesReporter class
 	public void getData() { //defines the getData method
 		Scanner keyboard = new Scanner(System.in); //instantiate Scanner object
 
-		System.out.println("Enter number of sales associates:"); //print the line
-		this.numOfAssociates = keyboard.nextInt(); //set the instance variable as the entered value.
+		team = new ArrayList<SalesAssociate>();
+		boolean done = false;
 
-
-		team = new SalesAssociate[numOfAssociates]; //instantiate the team array by entering the length of the array
-
-
-		for(int i=0; i< numOfAssociates; i++ ) { //for loop starts from i is 0, and repeats until i is smaller than numOfAssociates 
+		while(!done) {
 
 			SalesAssociate mySalesAssociate = new SalesAssociate(); //instantiate the SalesAssociate object
 
-			team[i] = mySalesAssociate; //set the team array value as mySalesAssociate object
 
-			System.out.println("Enter data for associate number " + (i+1)); //print the line
+			System.out.println("Enter data for associate"); //print the line
 			System.out.print("Enter name of sales associate: "); //print the line
 			String name = keyboard.nextLine(); //set local variable name as entered value
-			name = keyboard.nextLine(); //when entering the length of the team array, the "enter" inputs keyboard.nextLine(). So, write the code one more.
+			mySalesAssociate.setName(name); //set name data of mySalesAssociate object as the variable name.
+
+
 			System.out.print("Enter associate's sales: $ "); //print the line 
 			double sales = keyboard.nextDouble(); //set local variable sales as entered value
-
-			mySalesAssociate.setName(name); //set name data of mySalesAssociate object as the variable name.
 			mySalesAssociate.setSales(sales); //set sales data of mySalesAssociate object as the variable sales.
 
+			team.add(mySalesAssociate);
 
+			System.out.println("Do you want to enter more data of a sales associate? [yes/no]:");
+			String ans = keyboard.nextLine();
+			ans = keyboard.nextLine();
+	
+			if(ans.equalsIgnoreCase("no"))
+				done = true;
 		}
 	}
 
@@ -65,16 +68,19 @@ public class SalesReporter { //defines SalesReporter class
 
 		double sum = 0; //local variable
 
-		for(int i=0; i< numOfAssociates; i++ ) { //for loop
-			sum += team[i].getSales(); //sums all sales of each objects, which are in the team array.
+		for(SalesAssociate salesAssociate : team ) { //for loop
+			sum += salesAssociate.getSales();
 		}
 
-		averageSales = (int)sum/numOfAssociates; //get average of sales, and make the average value as integer by casting.
+		averageSales = (int)sum/team.size(); //get average of sales, and make the average value as integer by casting.
 
-		highestSales = team[0].getSales(); //suppose the sales of first object is highest one.
-		for(int i=1; i<numOfAssociates; i++) { //for loop
-			if(team[i].getSales()>highestSales) //if the sales of other object is higher than first one
-				highestSales = team[i].getSales(); //assign highestSales as the sales of the other one. If not, there is no change.
+		SalesAssociate man = team.get(0);
+
+		highestSales = man.getSales(); //suppose the sales of first object is highest one.
+
+		for(SalesAssociate salesAssociate : team ) { //for loop
+			if(salesAssociate.getSales() > highestSales) //if the sales of other object is higher than first one
+				highestSales = salesAssociate.getSales(); //assign highestSales as the sales of the other one. If not, there is no change.
 		}
 
 	}
@@ -91,37 +97,92 @@ public class SalesReporter { //defines SalesReporter class
 		System.out.println(""); //print enter
 		System.out.println("The following had the highest sales: "); //print the line
 
-		for(int i=0; i<numOfAssociates; i++) { //for loop
+		for(SalesAssociate salesAssociate : team ) { //for loop
 
-			if(highestSales == team[i].getSales()) { //when the sales of ith object is highest one 
-				System.out.println("Name: " + team[i].getName()); //print the name of the object
-				System.out.println("Sales: $" + team[i].getSales()); //print the sales of the object
-				System.out.println("$" + (team[i].getSales()- averageSales)+ " above the average."); //print the difference between the sales and the average.
-				System.out.println(""); //print enter
+			if(highestSales == salesAssociate.getSales()) { //when the sales of ith object is highest one 
+				System.out.println("Name: " + salesAssociate.getName()); //print the name of the object
+				System.out.println("Sales: $" + salesAssociate.getSales()); //print the sales of the object
+				System.out.println("$" + (salesAssociate.getSales()- averageSales)+ " above the average."); //print the difference between the sales and the average.
+				System.out.println(); //print enter
 			}
 		}	
 
 		System.out.println("The rest performed as follows: "); //print the line
-		for(int i=0; i<numOfAssociates; i++) { //for loop
 
-			if(highestSales != team[i].getSales()) { //this case is for the rest objects
-				System.out.println("Name: " + team[i].getName()); //print the name of object
-				System.out.println("Sales: $" + team[i].getSales()); //print the sales of object
-				if(averageSales < team[i].getSales()) { //when average is smaller than the sales of the object
-					System.out.println("$" + (team[i].getSales()- averageSales)+ " above the average. " ); //the average subtracted from the sales  
-					System.out.println(""); //print enter
+		for(SalesAssociate salesAssociate : team ) { //for loop
+
+			if(highestSales != salesAssociate.getSales()) { //this case is for the rest objects
+				System.out.println("Name: " + salesAssociate.getName()); //print the name of object
+				System.out.println("Sales: $" + salesAssociate.getSales()); //print the sales of object
+				if(averageSales < salesAssociate.getSales()) { //when average is smaller than the sales of the object
+					System.out.println("$" + (salesAssociate.getSales()- averageSales)+ " above the average. " ); //the average subtracted from the sales  
+					System.out.println(); //print enter
 				}
-				if(averageSales == team[i].getSales()) { //when average is same with the sales of the object
-					System.out.println("Sales is same with the average." + "%n"); //print the line
-					System.out.println(""); //print enter
+				if(averageSales == salesAssociate.getSales()) { //when average is same with the sales of the object
+					System.out.println("Sales is same with the average."); //print the line
+					System.out.println(); //print enter
 				}
-				if(averageSales > team[i].getSales()) { //hen average is bigger than the sales of the object
-					System.out.println("$" + (averageSales - team[i].getSales())+ " below the average. "); //the sales subtracted from the average
+				if(averageSales > salesAssociate.getSales()) { //hen average is bigger than the sales of the object
+					System.out.println("$" + (averageSales - salesAssociate.getSales())+ " below the average. "); //the sales subtracted from the average
 					System.out.println(""); //print enter
 				}
 
 			}
 		}
+
+	}
+
+	public class SalesAssociate { //defines SalesAssociate class
+
+		private String name; //instance variable
+		private double sales; //instance variable
+
+		public SalesAssociate() { //default constructor
+			name = "Null"; //set name as Null
+			sales = 0; //set sales as 0
+		}
+
+		/**
+		 * defines the constructor which has name and sales parameters.
+		 * By this constructor, you can initialize the data. 
+		 * And the data is entered into corresponding class variable.
+		 * @param name refers sales associate's name.
+		 * @param sales refers sales associate's sales.
+		 */
+		public SalesAssociate(String name, double sales) { //constructor
+			this.name = name; //initialize the instance variable name by input parameter
+			this.sales = sales; //initialize the instance variable sales by input parameter
+		}
+
+		/**
+		 * returns sales associate's name.
+		 * @return refers the name.
+		 */
+		public String getName() { //defines getter for name
+			return name; //returns instance variable name
+		}
+		/**
+		 * sets sales associate's name which is entered.
+		 * @param name refers the entered name.
+		 */
+		public void setName(String name) { //defines setter for name
+			this.name = name; //sets instance variable name as entered parameter value
+		}
+		/**
+		 * returns sales associate's sales.
+		 * @return refers the sale.
+		 */
+		public double getSales() { //defines getter for sales
+			return sales; //returns instance variable sales
+		}
+		/**sets sales associate's sales which is entered.
+		 * @param sales refers the entered sales.
+		 */
+		public void setSales(double sales) { //defines setter for sales
+			this.sales = sales; //sets instance variable sales as entered parameter value
+		}
+
+
 
 	}
 
